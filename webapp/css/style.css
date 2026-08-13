@@ -1,108 +1,428 @@
+/* =========================================================
+   Visual Cypher - Modern UI
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-dark: #0b1020;
+    --card-bg: rgba(17, 24, 39, 0.78);
+    --card-border: rgba(255, 255, 255, 0.12);
+    --text-primary: #f8fafc;
+    --text-secondary: #aeb8ca;
+    --accent: #7c5cff;
+    --accent-hover: #9278ff;
+    --danger: #ef4444;
+    --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+}
+
 body {
-    margin: 0px;
-    font-family: 'Merriweather', serif;
-    color: black;
-    background-color: rgb(241, 242, 243);
-    background-image: url('./assets/imgs/image.jpg'); /* Assuming your image path is correct */
+    margin: 0;
+    min-height: 100vh;
+
+    font-family: "Inter", "Segoe UI", sans-serif;
+    color: var(--text-primary);
+
+    background-color: var(--bg-dark);
+    background-image:
+        linear-gradient(
+            rgba(5, 10, 25, 0.68),
+            rgba(5, 10, 25, 0.78)
+        ),
+        url("../assets/imgs/background.jpg");
+
     background-size: cover;
-    background-repeat: no-repeat;
-  }
-  
-  /* Removed unnecessary margin-top: 1px; */
-  
-  .heading {
-    background-color: rgb(241, 242, 243);
-    border: 1px solid black;
-    display: flex; /* Assuming you want heading elements to be arranged horizontally */
-    align-items: center; /* Center elements vertically within the heading */
-    justify-content: space-evenly; /* Distribute elements evenly within the heading */
-    gap: 1px; /* Maintain a small gap between elements */
-  }
-  
-  .navbar {
-    border-bottom: 1px solid black;
-    background-color: gray;
-    height: 50px;
-  }
-  
-  hr {
-    margin: 20px;
-  }
-  
-  .grid-container {
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* =========================================================
+   Main heading
+   ========================================================= */
+
+.heading {
+    width: min(1100px, calc(100% - 40px));
+    margin: 35px auto 25px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+
+    background: transparent;
+    border: none;
+}
+
+.heading img {
+    width: 42px;
+    height: 42px;
+}
+
+.heading h1 {
+    margin: 0;
+
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.heading h1 a {
+    color: var(--text-primary);
+    text-decoration: none;
+}
+
+/* =========================================================
+   Subtitle
+   ========================================================= */
+
+.heading::after {
+    content: "Image encryption inspired by Rubik's Cube transformations";
+
+    position: absolute;
+    margin-top: 85px;
+
+    color: var(--text-secondary);
+    font-size: 14px;
+    letter-spacing: 0.3px;
+}
+
+/* =========================================================
+   Main workspace
+   ========================================================= */
+
+.grid-container {
+    width: min(1100px, calc(100% - 40px));
+    margin: 65px auto 25px;
+
     display: grid;
-    grid-template-columns: 2fr 1fr 2fr;
-    grid-template-rows: 1fr 3fr 1fr;
-    /* Removed height and width as they might cause unintended behavior */
-  }
-  
-  .grid-item {
-    justify-self: center;
-    align-self: center;
-  }
-  
-  .input-img-heading {
-    grid-area: 1/1/1/2; /* Adjusted to span two columns */
-  }
-  
-  .output-img-heading {
-    grid-area: 1/3/2/4;
-  }
-  
-  .action-btn {
-    grid-area: 2/2/2/2;
-  }
-  
-  .input-img {
-    grid-area: 2/1/3/2;
-    width: 300px;
-    height: 300px;
-  }
-  
-  .output-img {
-    grid-area: 2/3/3/3;
-    width: 300px;
-    height: 300px;
-  }
-  
-  .img-uploader, .img-key-uploader {
-    grid-area: 3/1/4/2;
-  }
-  
-  .img-key-uploader {
+
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto;
+
+    column-gap: 30px;
+    row-gap: 18px;
+}
+
+/* =========================================================
+   Image headings
+   ========================================================= */
+
+.input-img-heading,
+.output-img-heading {
+    margin: 0;
+
+    color: var(--text-secondary);
+
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+
+    justify-self: start;
+}
+
+.input-img-heading {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.output-img-heading {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+/* =========================================================
+   Image cards
+   ========================================================= */
+
+.input-img,
+.output-img {
+    width: 100%;
+    max-width: 500px;
+    aspect-ratio: 1 / 1;
+
+    object-fit: contain;
+
+    padding: 15px;
+
+    background: var(--card-bg);
+
+    border: 1px solid var(--card-border);
+    border-radius: 18px;
+
+    box-shadow: var(--shadow);
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    justify-self: stretch;
+}
+
+.input-img {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.output-img {
+    grid-column: 2;
+    grid-row: 2;
+}
+
+/* =========================================================
+   Upload / key controls
+   ========================================================= */
+
+.img-uploader,
+.img-key-uploader {
+    grid-row: 3;
+
     display: flex;
-    flex-direction: row;
-    gap: 20px;
-  }
-  
-  .download-btns {
-    grid-area: 3/3/4/4;
-  }
-  
-  /* Removed unused .row-container and .col-container classes */
-  
-  .button-container { /* Assuming you created a new class for buttons */
-    display: flex;
-    justify-content: center; /* Center buttons horizontally */
-    gap: 20px;
-  }
-  
-  .button {
-    width: 120px;
-    height: 40px;
-    background-color: #ff5733;
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+
+    min-height: 55px;
+}
+
+.img-uploader {
+    grid-column: 1;
+}
+
+.img-key-uploader {
+    grid-column: 1 / 3;
+}
+
+.img-key-uploader button {
+    min-width: 150px;
+}
+
+/* =========================================================
+   Buttons
+   ========================================================= */
+
+.button {
+    min-width: 140px;
+    height: 44px;
+
+    padding: 0 20px;
+
+    border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 10px;
-    display: inline-flex;
+
+    background: rgba(255, 255, 255, 0.08);
+
+    color: var(--text-primary);
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.button:hover {
+    background: rgba(255, 255, 255, 0.14);
+
+    border-color: rgba(255, 255, 255, 0.22);
+
+    transform: translateY(-2px);
+}
+
+.button:active {
+    transform: translateY(0);
+}
+
+/* =========================================================
+   Encrypt / Decrypt navigation
+   ========================================================= */
+
+.button-container {
+    width: min(420px, calc(100% - 40px));
+    margin: 25px auto 15px;
+
+    display: flex;
+
+    padding: 5px;
+
+    gap: 5px;
+
+    background: rgba(15, 23, 42, 0.75);
+
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+.button-container .button {
+    flex: 1;
+
+    min-width: 0;
+
+    border: none;
+
+    background: transparent;
+}
+
+.button-container .button:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* =========================================================
+   Main transform button
+   ========================================================= */
+
+.transform-container {
+    display: flex;
+    justify-content: center;
+
+    margin: 10px auto 25px;
+}
+
+#transform-img-btn {
+    min-width: 190px;
+    height: 50px;
+
+    background: var(--accent);
+
+    border: none;
+
+    font-size: 15px;
+
+    box-shadow: 0 10px 30px rgba(124, 92, 255, 0.28);
+}
+
+#transform-img-btn:hover {
+    background: var(--accent-hover);
+
+    box-shadow: 0 14px 35px rgba(124, 92, 255, 0.38);
+}
+
+/* =========================================================
+   Download buttons
+   ========================================================= */
+
+.download-btns {
+    grid-column: 2;
+    grid-row: 3;
+
+    display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0 15px;
+
+    gap: 12px;
+}
+
+/* =========================================================
+   Divider
+   ========================================================= */
+
+hr {
+    width: min(1100px, calc(100% - 40px));
+
+    margin: 25px auto;
+
     border: none;
-    cursor: pointer;
-    color: #fff;
-    font-weight: bold;
-  }
-  
-  .button:hover {
-    background-color: #ff6e40;
-  }
-  
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* =========================================================
+   Responsive design
+   ========================================================= */
+
+@media (max-width: 750px) {
+
+    .heading {
+        margin-top: 25px;
+    }
+
+    .heading img {
+        width: 34px;
+        height: 34px;
+    }
+
+    .heading h1 {
+        font-size: 28px;
+    }
+
+    .heading::after {
+        display: none;
+    }
+
+    .grid-container {
+        width: calc(100% - 30px);
+
+        grid-template-columns: 1fr;
+
+        column-gap: 0;
+    }
+
+    .input-img-heading {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    .input-img {
+        grid-column: 1;
+        grid-row: 2;
+    }
+
+    .output-img-heading {
+        grid-column: 1;
+        grid-row: 3;
+    }
+
+    .output-img {
+        grid-column: 1;
+        grid-row: 4;
+    }
+
+    .img-uploader {
+        grid-column: 1;
+        grid-row: 5;
+    }
+
+    .img-key-uploader {
+        grid-column: 1;
+        grid-row: 5;
+
+        flex-wrap: wrap;
+    }
+
+    .download-btns {
+        grid-column: 1;
+        grid-row: 6;
+
+        flex-wrap: wrap;
+    }
+
+    .button {
+        min-width: 125px;
+    }
+}
+#status-message {
+    min-height: 22px;
+
+    margin: 0 auto 20px;
+
+    text-align: center;
+
+    color: var(--text-secondary);
+
+    font-size: 14px;
+}
+
+#transform-img-btn:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+    transform: none;
+}

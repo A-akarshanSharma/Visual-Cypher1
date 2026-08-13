@@ -11,10 +11,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&display=swap" rel="stylesheet">
   <script type="module" src="https://pyscript.net/releases/2023.11.1/core.js"></script>
 </head>
-<body style="background-image: url('./assets/imgs/background.jpg'); background-size: cover; background-repeat: no-repeat;">
+
   <div class="row-container heading">
     <img src="./assets/icons/rubik.ico" width="50px" height="50px"/>
-    <h1><a href="https://www.hindawi.com/journals/jece/2012/173931/" target="blank">Visual Cypher</a></h1>
+    <h1>Visual Cypher</h1>
     <img src="./assets/icons/rubik.ico" width="50px" height="50px"/>
   </div>
 
@@ -35,7 +35,7 @@
       <input type="file" id="encrypted-img-input" style="display: none;" accept=".png" onchange="previewImage(event, 'input-img')">
       <input type="file" id="key-input" style="display: none;" accept=".txt" onchange="previewText(event, 'crypto-key')">
     </div>
-    <div class="grid-item download-btns" id="img-key-downloader">
+    <div style="display: none;" class="grid-item download-btns" id="img-key-downloader">
       <button class="button" onclick="downloadKey('crypto-key', 'key.txt')"> Download Key </button>
       <button class="button" onclick="downloadImage('output-img', 'modified.png')"> Download Image </button>
     </div>
@@ -45,6 +45,11 @@
     <button class="button" id="encrypt-nav-item"> Encrypt </button>
     <button class="button" id="decrypt-nav-item"> Decrypt </button>
   </div>
+  <div class="transform-container">
+    <button class="button" id="transform-img-btn">Encrypt</button>
+</div>
+
+<div id="status-message"></div>
   
   <div style="display: none;" id="crypto-key"></div>
   <hr/>

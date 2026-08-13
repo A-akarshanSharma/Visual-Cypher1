@@ -30,3 +30,7 @@ dist/
 .env
 .env.*
 !.env.example
+
+# Generated encryption keys
+key.txt
+test_key.txt
